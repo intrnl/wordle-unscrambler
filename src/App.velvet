@@ -11,9 +11,9 @@
 	function search (ev) {
 		ev.preventDefault();
 
-		let exclude_array = exclude.split('');
-		let include_array = include.split('');
 		let matches = [...string];
+		let include_array = [...include];
+		let exclude_array = [...exclude];
 
 		results = dict.filter((word) => {
 			return (
