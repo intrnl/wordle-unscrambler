@@ -58,6 +58,8 @@
 	<button type=button @click={reset}>reset</button>
 </form>
 
+<hr />
+
 <span>{results.length} results</span>
 <ul>
 	{#each item of results}
@@ -88,6 +90,13 @@
 	button {
 		padding: 8px;
 		margin-right: 8px;
+	}
+
+	hr {
+		color: transparent;
+		border: 0;
+		border-bottom: 1px solid #808080;
+		margin: 16px 0;
 	}
 
 	ul {
