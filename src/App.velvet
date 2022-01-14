@@ -1,0 +1,103 @@
+<script>
+	import '~/style.css';
+	import dict from '~/assets/dict.json';
+
+	let include = '';
+	let exclude = '';
+	let string = '';
+
+	let results = [];
+
+	function search (ev) {
+		ev.preventDefault();
+
+		let exclude_array = exclude ? exclude.split('') : [];
+		let include_array = include ? include.split('') : [];
+		let matches = [...string];
+
+		results = dict.filter((word) => {
+			return (
+				(exclude_array ? !exclude_array.some((char) => word.includes(char)) : true) &&
+				(include_array ? include_array.every((char) => word.includes(char)) : true) &&
+				matches.every((char, idx) => char === '?' || word[idx] === char)
+			);
+		});
+
+		// remove duplicate letters from include and exclude
+		include = include_array.filter((char, idx) => include_array.indexOf(char) === idx).join('');
+		exclude = exclude_array.filter((char, idx) => exclude_array.indexOf(char) === idx).join('');
+	}
+
+	function reset () {
+		include = '';
+		exclude = '';
+		string = '';
+		results = [];
+	}
+</script>
+
+<h3>wordle unscrambler</h3>
+
+<form @submit={search}>
+	<label>
+		<span>word to search (use ? for placeholders)</span>
+		<input :value={string} pattern=[a-z?]+ maxlength=5 />
+	</label>
+
+	<label>
+		<span>include letters</span>
+		<input :value={include} pattern=[a-z]+ />
+	</label>
+
+	<label>
+		<span>exclude letters</span>
+		<input :value={exclude} pattern=[a-z]+ />
+	</label>
+
+	<button type=submit>search</button>
+	<button type=button @click={reset}>reset</button>
+</form>
+
+<span>{results.length} results</span>
+<ul>
+	{#each item of results}
+		<li>{item}</li>
+	{/each}
+</ul>
+
+<style>
+	h3, form, label {
+		display: block;
+		margin-top: 0;
+		margin-bottom: 16px;
+	}
+
+	label > span {
+		display: block;
+		margin-bottom: 4px;
+	}
+
+	input {
+		width: -moz-available;
+		width: -webkit-fill-available;
+		width: fill-available;
+		font-family: monospace;
+		padding: 8px;
+	}
+
+	button {
+		padding: 8px;
+		margin-right: 8px;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0;
+		gap: 16px;
+	}
+
+	li {
+		display: block;
+	}
+</style>

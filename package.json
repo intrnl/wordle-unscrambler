@@ -1,0 +1,17 @@
+{
+	"type": "module",
+	"name": "todomvc-velvet",
+	"scripts": {
+		"dev": "NODE_ENV=development node ./scripts/dev.js",
+		"build": "NODE_ENV=production node ./scripts/build.js"
+	},
+	"dependencies": {
+		"@intrnl/velvet": "^0.1.19"
+	},
+	"devDependencies": {
+		"@intrnl/esbuild-plugin-build-analysis": "^0.1.2",
+		"@intrnl/esbuild-plugin-velvet": "^0.2.2",
+		"@intrnl/velvet-compiler": "^0.3.17",
+		"esbuild": "^0.14.11"
+	}
+}
