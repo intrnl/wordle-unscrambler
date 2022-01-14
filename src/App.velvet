@@ -12,8 +12,8 @@
 		ev.preventDefault();
 
 		let matches = [...string];
-		let include_array = [...include];
-		let exclude_array = [...exclude];
+		let include_array = [...new Set(include)];
+		let exclude_array = [...new Set(exclude)];
 
 		results = dict.filter((word) => {
 			return (
@@ -23,9 +23,8 @@
 			);
 		});
 
-		// remove duplicate letters from include and exclude
-		include = include_array.filter((char, idx) => include_array.indexOf(char) === idx).join('');
-		exclude = exclude_array.filter((char, idx) => exclude_array.indexOf(char) === idx).join('');
+		include = include_array.join('');
+		exclude = exclude_array.join('');
 	}
 
 	function reset () {
