@@ -1,3 +1,17 @@
+<script context='module'>
+	const CF_ANALYTICS_TOKEN = process.env.CF_ANALYTICS_TOKEN;
+
+	if (CF_ANALYTICS_TOKEN) {
+		globalThis.__cfBeacon = { token: CF_ANALYTICS_TOKEN };
+
+		const script = document.createElement('script');
+		script.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+		script.defer = true;
+
+		document.head.append(script);
+	}
+</script>
+
 <script>
 	import '~/style.css';
 	import dict from '~/assets/dict.json';
