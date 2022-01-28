@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild';
 
 import velvet from '@intrnl/esbuild-plugin-velvet';
+import env from '@intrnl/esbuild-plugin-env';
 
 
 /** @type {esbuild.BuildOptions} */
@@ -13,6 +14,7 @@ export let config = {
 	sourcemap: true,
 
 	plugins: [
+		env(),
 		velvet(),
 	],
 };
